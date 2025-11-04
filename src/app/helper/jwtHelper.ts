@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import jwt from 'jsonwebtoken';
+import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 
 const creatToken = (user:User) => {
@@ -18,7 +18,7 @@ return {
  
 
  const verifyToken = (token:string) => {
-  return jwt.verify(token, config.jwt_secret as string);
+  return jwt.verify(token, config.jwt_secret as string) as JwtPayload;
 };
 
 export const jwtHelper = {
