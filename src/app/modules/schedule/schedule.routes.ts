@@ -17,8 +17,8 @@ router.post(
 )
 
 
-// router.delete(
-//     "/:id",
-//     ScheduleController.deleteScheduleFromDB
-// )
+router.delete(
+    "/:id",
+    ScheduleController.deleteScheduleFromDB
+)
 export const ScheduleRoutes = router;

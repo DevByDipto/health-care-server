@@ -32,8 +32,19 @@ const schedulesForDoctor = catchAsync(async (req: Request & { user?: IJWTPayload
     })
 })
 
+const deleteScheduleFromDB = catchAsync(async (req: Request, res: Response) => {
+    const result = await ScheduleService.deleteScheduleFromDB(req.params.id);
+
+    sendResponse(res, {
+        statusCode: 200,
+        success: true,
+        message: "Schedule deleted successfully!",
+        data: result
+    })
+})
+
 export const ScheduleController = {
     insertIntoDB,
     schedulesForDoctor,
-    // deleteScheduleFromDB
+    deleteScheduleFromDB
 }

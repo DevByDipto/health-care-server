@@ -70,6 +70,7 @@ const schedulesForDoctor = async (
 ) => {
     const { page, limit, skip, sortBy, sortOrder } = paginationHelper.calculatePagination(options);
     const { startDateTime: filterStartDateTime, endDateTime: filterEndDateTime } = fillters;
+console.log(filterStartDateTime,filterEndDateTime);
 
     const andConditions: Prisma.ScheduleWhereInput[] = [];
 
@@ -139,10 +140,22 @@ const schedulesForDoctor = async (
         },
         data: result
     };
+
+// ---------------------------------------------------
+
+
+}
+
+const deleteScheduleFromDB = async (id: string) => {
+    return await prisma.schedule.delete({
+        where: {
+            id
+        }
+    })
 }
 
 export const ScheduleService = {
     insertIntoDB,
     schedulesForDoctor, 
-    // deleteScheduleFromDB
+    deleteScheduleFromDB
 }
