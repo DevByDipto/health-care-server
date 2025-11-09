@@ -45,4 +45,4 @@ router.post(
 );
 
 
-export  const userRoute =  router;
+export  const userRoutes =  router;
