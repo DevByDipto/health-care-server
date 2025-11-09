@@ -20,6 +20,7 @@ const login = async (payload:User) => {
     // Implement login logic here
     return { 
        userToken,
+       user,
          needPasswordChange: user.needPasswordChange
      };
 }

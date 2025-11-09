@@ -8,7 +8,7 @@ import { setCookie } from "../../helper/setCookie";
 const login =catchAsync(async (req:Request, res:Response,next:NextFunction) => {
 
     const result = await AuthService.login(req.body);
-const {userToken,needPasswordChange} = result;
+const {userToken,needPasswordChange,user} = result;
 setCookie(res,userToken);
 
     sendResponse(res, {
@@ -17,6 +17,7 @@ setCookie(res,userToken);
         message: "Patient logged in successfully", 
         data: {
             needPasswordChange,
+            user,
         },
     });
 }) 
