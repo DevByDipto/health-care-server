@@ -21,7 +21,7 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
                 [field]: {
                     contains: searchTerm,
                     mode: "insensitive"
-                } 
+                }
             }))
         })
     }
@@ -38,7 +38,7 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
                         }
                     }
                 }
-            } 
+            }
         })
     }
 
@@ -67,10 +67,16 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
                     specialities: true
                 }
             },
-            doctorSchedules:{
-                include:{
-                    schedule:true
+            doctorSchedules: {
+                include: {
+                    schedule: true
                 }
+            },
+            review: {
+                select: {
+                    rating: true
+                }
+
             }
         }
     });
@@ -91,21 +97,21 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
 
 const updateIntoDB = async (id: string, payload: Partial<IDoctorUpdateInput>) => {
     console.log(id);
-    
+
     const doctorInfo = await prisma.doctor.findUniqueOrThrow({
         where: {
             id,
         }
     });
-    
+
     const { specialties, ...doctorData } = payload;
     // console.log(specialties);
 
     return await prisma.$transaction(async (tnx) => {
         if (specialties && specialties.length > 0) {
             const deleteSpecialtyIds = specialties.filter((specialty) => specialty.isDeleted);
-// console.log("work");
-// console.log(deleteSpecialtyIds,"deleteSpecialtyIds");
+            // console.log("work");
+            // console.log(deleteSpecialtyIds,"deleteSpecialtyIds");
 
 
             for (const specialty of deleteSpecialtyIds) {
@@ -118,7 +124,7 @@ const updateIntoDB = async (id: string, payload: Partial<IDoctorUpdateInput>) =>
             }
 
             const createSpecialtyIds = specialties.filter((specialty) => !specialty.isDeleted);
-// console.log(createSpecialtyIds,"createSpecialtyIds");
+            // console.log(createSpecialtyIds,"createSpecialtyIds");
 
             for (const specialty of createSpecialtyIds) {
                 await tnx.doctorSpecialties.create({
@@ -157,9 +163,9 @@ const getAISuggestions = async (payload: { symptoms: string }) => {
         throw new ApiError(httpStatus.BAD_REQUEST, "symptoms is required!")
     };
 
-const { symptoms } = payload
+    const { symptoms } = payload
 
-const doctors = await prisma.doctor.findMany({
+    const doctors = await prisma.doctor.findMany({
         where: { isDeleted: false },
         include: {
             doctorSpecialties: {
@@ -170,9 +176,9 @@ const doctors = await prisma.doctor.findMany({
         }
     });
     // console.log(JSON.stringify(doctors, null, 2));
-    
-    
-    
+
+
+
 
     const prompt = `
 Patient symptoms: ${symptoms}
@@ -184,70 +190,70 @@ Select the **best 3 doctors** from the list that are most suitable based on the 
 Return your response in JSON format with full individual doctor data. 
     `;
 
-        const completion = await openai.chat.completions.create({
-      model: "z-ai/glm-4.5-air:free", 
-      messages: [
-        { role: "system", content: "You are a medical assistant AI." },
-        { role: "user", content: prompt },
-      ],
+    const completion = await openai.chat.completions.create({
+        model: "z-ai/glm-4.5-air:free",
+        messages: [
+            { role: "system", content: "You are a medical assistant AI." },
+            { role: "user", content: prompt },
+        ],
     });
 
     const suggestion = completion.choices[0].message?.content;
 
-const result = suggestion?.replace(/```json\s*([\s\S]*?)\s*```/i, '$1');
+    const result = suggestion?.replace(/```json\s*([\s\S]*?)\s*```/i, '$1');
 
     // console.log(cleanJson);
-    
 
 
-    
-    
+
+
+
 
     // ------------------------------
-//     const doctors = await prisma.doctor.findMany({
-//         where: { isDeleted: false },
-//         include: {
-//             doctorSpecialties: {
-//                 include: {
-//                     specialities: true
-//                 }
-//             }
-//         }
-//     });
+    //     const doctors = await prisma.doctor.findMany({
+    //         where: { isDeleted: false },
+    //         include: {
+    //             doctorSpecialties: {
+    //                 include: {
+    //                     specialities: true
+    //                 }
+    //             }
+    //         }
+    //     });
 
-//     console.log("doctors data loaded.......\n");
-//     const prompt = `
-// You are a medical assistant AI. Based on the patient's symptoms, suggest the top 3 most suitable doctors.
-// Each doctor has specialties and years of experience.
-// Only suggest doctors who are relevant to the given symptoms.
+    //     console.log("doctors data loaded.......\n");
+    //     const prompt = `
+    // You are a medical assistant AI. Based on the patient's symptoms, suggest the top 3 most suitable doctors.
+    // Each doctor has specialties and years of experience.
+    // Only suggest doctors who are relevant to the given symptoms.
 
-// Symptoms: ${payload.symptoms}
+    // Symptoms: ${payload.symptoms}
 
-// Here is the doctor list (in JSON):
-// ${JSON.stringify(doctors, null, 2)}
+    // Here is the doctor list (in JSON):
+    // ${JSON.stringify(doctors, null, 2)}
 
-// Return your response in JSON format with full individual doctor data. 
-// `;
+    // Return your response in JSON format with full individual doctor data. 
+    // `;
 
-//     console.log("analyzing......\n")
-//     const completion = await openai.chat.completions.create({
-//         model: 'z-ai/glm-4.5-air:free',
-//         messages: [
-//             {
-//                 role: "system",
-//                 content:
-//                     "You are a helpful AI medical assistant that provides doctor suggestions.",
-//             },
-//             {
-//                 role: 'user',
-//                 content: prompt,
-//             },
-//         ],
-//     });
+    //     console.log("analyzing......\n")
+    //     const completion = await openai.chat.completions.create({
+    //         model: 'z-ai/glm-4.5-air:free',
+    //         messages: [
+    //             {
+    //                 role: "system",
+    //                 content:
+    //                     "You are a helpful AI medical assistant that provides doctor suggestions.",
+    //             },
+    //             {
+    //                 role: 'user',
+    //                 content: prompt,
+    //             },
+    //         ],
+    //     });
 
-//     const result = await extractJsonFromMessage(completion.choices[0].message)
-//     console.log(result);
-    
+    //     const result = await extractJsonFromMessage(completion.choices[0].message)
+    //     console.log(result);
+
     return result;
 }
 
@@ -267,7 +273,8 @@ const getByIdFromDB = async (id: string): Promise<Doctor | null> => {
                 include: {
                     schedule: true
                 }
-            }
+            },
+            review:true
         },
     });
     return result;

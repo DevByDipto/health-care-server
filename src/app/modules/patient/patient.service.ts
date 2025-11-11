@@ -3,6 +3,7 @@ import { IPatientFilterRequest } from './patient.interface';
 import { IOptions, paginationHelper } from '../../helper/paginationHelper';
 import { patientSearchableFields } from './patient.constant';
 import { prisma } from '../../shared/prisma';
+import { IJWTPayload } from '../../types/common';
 
 
 const getAllFromDB = async (
@@ -101,8 +102,70 @@ const softDelete = async (id: string): Promise<Patient | null> => {
     });
 };
 
+const updateIntoDB = async (user: IJWTPayload, payload: any) => {
+    const { medicalReport, patientHealthData, ...patientData } = payload;
+
+    const patientInfo = await prisma.patient.findUniqueOrThrow({
+        where: {
+            email: user.email,
+            isDeleted: false
+        }
+    });
+console.log(patientInfo.id);
+
+    return await prisma.$transaction(async (tnx) => {
+        await tnx.patient.update({
+            where: {
+                id: patientInfo.id
+            },
+            data: patientData
+        })
+
+        if (patientHealthData) {
+            await tnx.patientHealthData.upsert({
+                where: {
+                    patientId: patientInfo.id
+                },
+                update: patientHealthData,
+                create: {
+                    ...patientHealthData,
+                      patient: {                    // ✅ relation field ব্যবহার করছেন
+        connect: { id: patientInfo.id }  // ✅ existing patient এর সাথে connect করছেন
+    },
+                }
+            })
+        }
+
+        if (medicalReport) {
+            await tnx.medicalReport.create({
+                data: {
+                    ...medicalReport,
+                     patient: {                    // ✅ relation field ব্যবহার করছেন
+        connect: { id: patientInfo.id }  // ✅ existing patient এর সাথে connect করছেন
+    },
+                }
+            })
+        }
+
+        const result = await tnx.patient.findUnique({
+            where: {
+                id: patientInfo.id
+            },
+            include: {
+                patientHealthData: true,
+                medicalReport: true
+            }
+        })
+        return result;
+    })
+
+
+
+}
+
 export const PatientService = {
     getAllFromDB,
     getByIdFromDB,
     softDelete,
+    updateIntoDB,
 };
