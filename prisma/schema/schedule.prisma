@@ -8,7 +8,7 @@ model Schedule {
     appointment Appointment[]
     
     @@map("schedules")
-}
+} 
 
 model DoctorSchedules {
     doctorId   String

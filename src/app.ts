@@ -7,7 +7,17 @@ import { uptime } from 'process';
 import { timeStamp } from 'console';
 import router from './app/routes';
 import cookieParser from 'cookie-parser'
+import { PaymentController } from './app/modules/payment/payment.controller';
 const app: Application = express();
+
+
+app.post(
+  "/webhook",
+  express.raw({ type: "application/json" }), // raw body for stripe verification
+  PaymentController.handleStripeWebhook
+);
+
+
 app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true

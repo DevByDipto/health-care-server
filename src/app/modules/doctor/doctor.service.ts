@@ -38,7 +38,7 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
                         }
                     }
                 }
-            }
+            } 
         })
     }
 
@@ -65,6 +65,11 @@ const getAllFromDB = async (filters: any, options: IOptions) => {
             doctorSpecialties: {
                 include: {
                     specialities: true
+                }
+            },
+            doctorSchedules:{
+                include:{
+                    schedule:true
                 }
             }
         }
@@ -312,7 +317,6 @@ export const DoctorService = {
     getAllFromDB,
     updateIntoDB,
     getAISuggestions,
-    
     getByIdFromDB,
     deleteFromDB,
     softDelete,
