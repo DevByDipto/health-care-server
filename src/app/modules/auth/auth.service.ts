@@ -91,7 +91,8 @@ const changePassword = async (user: any, payload: any) => {
 
 
 const getMe = async (session: any) => {
-    
+     // aii route aito others info gulo add kore akbare pathai dite partam tahole aldha kore abar user endpoint e me endpoint keno banano holo ? (support)
+     
     const accessToken = session.accessToken;
     const decodedData = jwtHelper.verifyToken(accessToken);
 
