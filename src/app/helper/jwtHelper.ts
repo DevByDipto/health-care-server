@@ -2,17 +2,16 @@ import { User } from '@prisma/client';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import config from '../../config';
 
-const creatToken = (user:User) => {
-const accessToken = jwt.sign({ email: user.email, role: user.role }, config.jwt_secret as string, { expiresIn: '1d' });
 
 
- const refreshToken = jwt.sign({ email: user.email, role: user.role }, config.jwt_secret as string, { expiresIn: '90d' });
+const accessToken =(user:User)=>{ 
+
+ return jwt.sign({ email: user.email, role: user.role }, config.jwt_secret as string, { expiresIn: '1d' });
+ }
 
 
-return {
-    accessToken,
-    refreshToken
-}
+ const refreshToken =(user:User)=>{
+return jwt.sign({ email: user.email, role: user.role }, config.jwt_secret as string, { expiresIn: '90d' });
 }
 
  
@@ -22,6 +21,7 @@ return {
 };
 
 export const jwtHelper = {
-  creatToken,
+   accessToken,
+    refreshToken,
   verifyToken,
 };
