@@ -5,8 +5,14 @@ import { auth } from '../../middlewares/auth';
 const router = express.Router();
 
 
+router.get(
+    '/my-prescription',
+    auth(UserRole.PATIENT),
+    PrescriptionController.patientPrescription
+)
+
 router.post(
-    "/", 
+    "/",  
     auth(UserRole.DOCTOR),
     PrescriptionController.createPrescription
 );

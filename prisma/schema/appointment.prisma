@@ -32,7 +32,7 @@ model Payment {
     @@map("payments")
 }
 
-model Prescription {
+model Prescription { 
     id            String      @id @default(uuid()) 
     appointmentId String      @unique
     appointment   Appointment @relation(fields: [appointmentId], references: [id])
