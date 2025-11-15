@@ -5,6 +5,7 @@ import { auth } from '../../middlewares/auth';
 
 const router = express.Router();
 
+router.get('/', ReviewController.getAllFromDB);
 router.post(
     '/',
     auth(UserRole.PATIENT),
