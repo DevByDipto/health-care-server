@@ -8,6 +8,9 @@ import { timeStamp } from 'console';
 import router from './app/routes';
 import cookieParser from 'cookie-parser'
 import { PaymentController } from './app/modules/payment/payment.controller';
+import { AppointmentService } from './app/modules/appointment/appointment.service';
+import cron from "node-cron"
+
 const app: Application = express();
 
 
@@ -16,7 +19,6 @@ app.post(
   express.raw({ type: "application/json" }), // raw body for stripe verification
   PaymentController.handleStripeWebhook
 );
-
 
 app.use(cors({
     origin: 'http://localhost:3000',
@@ -27,6 +29,15 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
+
+cron.schedule('* * * * *', () => {
+    try {
+        console.log("Node cron called at ", new Date())
+        AppointmentService.cancelUnpaidAppointments();
+    } catch (err) {
+        console.error(err);
+    }
+});
 
 app.use("/api/v1", router);
 
