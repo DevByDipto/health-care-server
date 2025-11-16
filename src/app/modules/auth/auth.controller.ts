@@ -73,9 +73,37 @@ const getMe = catchAsync(async (req: Request, res: Response) => {
         data: result,
     });
 });
+
+const forgotPassword = catchAsync(async (req: Request, res: Response) => {
+    await AuthService.forgotPassword(req.body);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Check your email!",
+        data: null,
+    });
+});
+
+const resetPassword = catchAsync(async (req: Request, res: Response) => {
+    const token = req.headers.authorization || "";  // headers.authorization keno use korlo ? (support)
+    // const { token } = req.query
+
+    await AuthService.resetPassword(token, req.body);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Password Reset!",
+        data: null,
+    });
+});
+
 export const AuthController = {
     login,
     refreshToken,
     changePassword,
-    getMe
+    getMe,
+    forgotPassword,
+    resetPassword
 }

@@ -1,5 +1,5 @@
 import express from 'express';
-import { userRoute, userRoutes } from '../modules/user/user.route';
+import {  userRoutes } from '../modules/user/user.route';
 import { authRoutes } from '../modules/auth/auth.routes';
 import { ScheduleRoutes } from '../modules/schedule/schedule.routes';
 import { doctorScheduleRoutes } from '../modules/doctorSchedule/doctorSchedule.routes';

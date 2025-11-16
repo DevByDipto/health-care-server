@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express"
 import { jwtHelper } from '../helper/jwtHelper'
-export const auth = (...roles) => {
+import { UserRole } from "@prisma/client"
+export const auth = (...roles:UserRole[]) => {
     return async (req: Request & { user?: any }, res: Response, next: NextFunction) => {
         try {
             const token = req.cookies.accessToken

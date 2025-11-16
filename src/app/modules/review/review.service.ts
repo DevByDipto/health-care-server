@@ -3,6 +3,8 @@ import { prisma } from "../../shared/prisma";
 import { IJWTPayload } from "../../types/common";
 import ApiError from "../../errors/ApiError";
 import httpStatus from 'http-status' 
+import { Prisma } from "@prisma/client";
+import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 
 
 const insertIntoDB = async (user: IJWTPayload, payload: any) => {
@@ -60,6 +62,7 @@ const getAllFromDB = async (
     options: IOptions,
 ) => {
     const { limit, page, skip } = paginationHelper.calculatePagination(options);
+
     const { patientEmail, doctorEmail } = filters;
     const andConditions = [];
 

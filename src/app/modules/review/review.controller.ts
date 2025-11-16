@@ -5,6 +5,7 @@ import { IJWTPayload } from "../../types/common";
 import catchAsync from "../../shared/catchAsync";
 import sendResponse from "../../shared/sendResponse";
 import pick from "../../helper/pick";
+import { reviewFilterableFields } from "./review.constant";
 
 const insertIntoDB = catchAsync(async (req: Request & { user?: IJWTPayload }, res: Response) => {
     const user = req.user;
@@ -31,5 +32,6 @@ const getAllFromDB = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const ReviewController = {
-    insertIntoDB
+    insertIntoDB,
+    getAllFromDB
 }

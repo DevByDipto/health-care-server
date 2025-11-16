@@ -3,9 +3,9 @@ import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { stripe } from "../../helper/strip";
 import { prisma } from "../../shared/prisma";
 import { IJWTPayload } from "../../types/common";
-import { v4 as uuidv4 } from 'uuid'; 
+import { v4 as uuidv4 } from 'uuid';  // (support)
 import { equal } from "assert";
-import ApiError from "../../errors/ApiError";
+import ApiError from "../../errors/ApiError"; 
 import httpStatus from 'http-status'
 
 
@@ -93,6 +93,7 @@ const createAppointment = async (user: IJWTPayload, payload: { doctorId: string,
         }
     })
 
+    // const videoCallingId = uuidv4();
     const videoCallingId = uuidv4();
 
     const result = await prisma.$transaction(async (tnx) => {

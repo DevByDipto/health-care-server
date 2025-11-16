@@ -23,5 +23,9 @@ export default {
     },
     stripSecretKey: process.env.STRIPE_SECRET_KEY,
     salt_round: process.env.SALT_ROUND,
-    reset_pass_link: process.env.RESET_PASS_LINK
+    reset_pass_link: process.env.RESET_PASS_LINK,
+      emailSender: {
+        email: process.env.EMAIL,
+        app_pass: process.env.APP_PASS
+    },
 }
