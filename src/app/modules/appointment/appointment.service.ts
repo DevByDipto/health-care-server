@@ -3,10 +3,11 @@ import { IOptions, paginationHelper } from "../../helper/paginationHelper";
 import { stripe } from "../../helper/strip";
 import { prisma } from "../../shared/prisma";
 import { IJWTPayload } from "../../types/common";
-import { v4 as uuidv4 } from 'uuid';  // (support)
+// import { v4 as uuidv4 } from 'uuid';  
 import { equal } from "assert";
 import ApiError from "../../errors/ApiError"; 
 import httpStatus from 'http-status'
+import { generateUUID } from "../../helper/generateUUID";
 
 
 const getMyAppointment = async (user: IJWTPayload, filters: any, options: IOptions) => {
@@ -94,7 +95,7 @@ const createAppointment = async (user: IJWTPayload, payload: { doctorId: string,
     })
 
     // const videoCallingId = uuidv4();
-    const videoCallingId = uuidv4();
+    const videoCallingId = generateUUID()
 
     const result = await prisma.$transaction(async (tnx) => {
 // appionment er modddhe payment backword relation diye unpaied relation createdat 30 ke khuje appoinment delete
@@ -120,7 +121,8 @@ const createAppointment = async (user: IJWTPayload, payload: { doctorId: string,
             }
         })
 
-        const transactionId = uuidv4();
+        // const transactionId = uuidv4();
+        const transactionId = generateUUID();
 
 // unpaied and createdat 30 minutes before relation ke khuje direct delete
         const paymentdata=await tnx.payment.create({

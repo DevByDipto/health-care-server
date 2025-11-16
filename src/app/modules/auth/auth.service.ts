@@ -4,7 +4,9 @@ import bcrypt from 'bcrypt';
 import { jwtHelper } from "../../helper/jwtHelper";
 import { Secret } from "jsonwebtoken";
 import config from "../../../config";
-
+import emailSender from "./emailSender";
+import ApiError from "../../errors/ApiError";
+import httpStatus from 'http-status'
 
 const login = async (payload:User) => {
 
@@ -123,11 +125,7 @@ const forgotPassword = async (payload: { email: string }) => {
         }
     });
 
-    const resetPassToken = jwtHelper.generateToken(
-        { email: userData.email, role: userData.role },
-        config.jwt.reset_pass_secret as Secret,
-        config.jwt.reset_pass_token_expires_in as string
-    )
+    const resetPassToken = jwtHelper.accessToken(userData)
 
     const resetPassLink = config.reset_pass_link + `?userId=${userData.id}&token=${resetPassToken}`
 
@@ -158,7 +156,7 @@ const resetPassword = async (token: string, payload: { id: string, password: str
         }
     });
 
-    const isValidToken = jwtHelper.verifyToken(token, config.jwt.reset_pass_secret as Secret)
+    const isValidToken = jwtHelper.verifyToken(token)
 
     if (!isValidToken) {
         throw new ApiError(httpStatus.FORBIDDEN, "Forbidden!")
