@@ -16,22 +16,32 @@ router.post(
     AuthController.login
 )
 
-// router.post(
-//     '/refresh-token',
-//     AuthController.refreshToken
-// )
+router.post(
+    '/refresh-token',
+    AuthController.refreshToken
+)
 
-// router.post(
-//     '/change-password',
-//     auth(
-//         UserRole.ADMIN,
-//         UserRole.DOCTOR,
-//         UserRole.PATIENT
-//     ),
-//     AuthController.changePassword
-// );
+router.post(
+    '/change-password',
+    auth(
+        UserRole.ADMIN,
+        UserRole.DOCTOR,
+        UserRole.PATIENT
+    ),
+    AuthController.changePassword
+);
 
 
 
+
+router.post(
+    '/forgot-password',
+    AuthController.forgotPassword
+);
+
+router.post(
+    '/reset-password',
+    AuthController.resetPassword
+)
 
 export const authRoutes = router;
