@@ -91,8 +91,45 @@ src/
 
 ```
  <h2>📬 API Endpoints</h2>
- <h3>🛠️ Admin Routes</h3> <table border="1" cellpadding="5" cellspacing="0">
-   <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/admin/</td> <td>Get all admins</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>GET</td> <td>/api/admin/:id</td> <td>Get admin by ID</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>PATCH</td> <td>/api/admin/:id</td> <td>Update admin information</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>DELETE</td> <td>/api/admin/:id</td> <td>Hard delete admin</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>DELETE</td> <td>/api/admin/soft/:id</td> <td>Soft delete admin</td> <td>✅</td> <td>ADMIN</td> </tr> </table>
+ 
+ <h3>🛠️ Admin Routes</h3> 
+ <table border="1" cellpadding="5" cellspacing="0">
+   <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/admin/</td> <td>Get all admins</td> <td>✅</td> <td>ADMIN</td> </tr> 
+  <tr> <td>GET</td> <td>/api/admin/:id</td> <td>Get admin by ID</td> <td>✅</td> <td>ADMIN</td> </tr>
+  <tr> <td>PATCH</td> <td>/api/admin/:id</td> <td>Update admin information</td> <td>✅</td> <td>ADMIN</td> </tr>
+  <tr> <td>DELETE</td> <td>/api/admin/:id</td> <td>Hard delete admin</td> <td>✅</td> <td>ADMIN</td> </tr>
+  <tr> <td>DELETE</td> <td>/api/admin/soft/:id</td> <td>Soft delete admin</td> <td>✅</td> <td>ADMIN</td> </tr> 
+ </table>
+
+<h3>🛠️ Doctor Routes</h3> 
+<table border="1" cellpadding="5" cellspacing="0"> 
+ <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr>
+ <tr> <td>GET</td> <td>/api/doctor/</td> <td>Get all doctors</td> <td>❌</td> <td>—</td> </tr> 
+ <tr> <td>PATCH</td> <td>/api/doctor/:id</td> <td>Update doctor information</td> <td>❌</td> <td>—</td> </tr>
+ <tr> <td>POST</td> <td>/api/doctor/suggestion</td> <td>Get AI-based doctor suggestions</td> <td>❌</td> <td>—</td> </tr>
+ <tr> <td>GET</td> <td>/api/doctor/:id</td> <td>Get doctor by ID</td> <td>❌</td> <td>—</td> </tr>
+ <tr> <td>DELETE</td> <td>/api/doctor/:id</td> <td>Hard delete doctor</td> <td>✅</td> <td>ADMIN</td> </tr>
+ <tr> <td>DELETE</td> <td>/api/doctor/soft/:id</td> <td>Soft delete doctor</td> <td>✅</td> <td>ADMIN</td> </tr>
+</table>
+
+<h3>🛠️ Doctor Schedule Routes</h3> <table border="1" cellpadding="5" cellspacing="0">
+ <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr>
+ <tr> <td>GET</td> <td>/api/doctor-schedule/</td> <td>Get all doctor schedules</td> <td>✅</td> <td>ADMIN, DOCTOR, PATIENT</td> </tr> <tr> <td>GET</td> <td>/api/doctor-schedule/my-schedule</td> <td>Get logged-in doctor’s own schedule</td> <td>✅</td> <td>DOCTOR</td> </tr> <tr> <td>POST</td> <td>/api/doctor-schedule/</td> <td>Create a new doctor schedule</td> <td>✅</td> <td>DOCTOR</td> </tr> <tr> <td>DELETE</td> <td>/api/doctor-schedule/:id</td> <td>Delete a doctor schedule</td> <td>✅</td> <td>DOCTOR</td> </tr> </table>
+
+ <h3>🛠️ User Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/user/</td> <td>Get all users</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>GET</td> <td>/api/user/me</td> <td>Get logged-in user profile</td> <td>✅</td> <td>ADMIN, DOCTOR, PATIENT</td> </tr> <tr> <td>POST</td> <td>/api/user/create-patient</td> <td>Create a new patient</td> <td>❌</td> <td>—</td> </tr> <tr> <td>POST</td> <td>/api/user/create-admin</td> <td>Create a new admin</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>POST</td> <td>/api/user/create-doctor</td> <td>Create a new doctor</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>PATCH</td> <td>/api/user/:id/status</td> <td>Change user profile status</td> <td>✅</td> <td>ADMIN</td> </tr> <tr> <td>PATCH</td> <td>/api/user/update-my-profile</td> <td>Update logged-in user profile</td> <td>✅</td> <td>ADMIN, DOCTOR, PATIENT</td> </tr> </table>
+
+  <h3>🛠️ Patient Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/patient/</td> <td>Get all patients</td> <td>❌</td> <td>—</td> </tr> <tr> <td>GET</td> <td>/api/patient/:id</td> <td>Get patient by ID</td> <td>❌</td> <td>—</td> </tr> <tr> <td>PATCH</td> <td>/api/patient/</td> <td>Update patient information</td> <td>✅</td> <td>PATIENT</td> </tr> <tr> <td>DELETE</td> <td>/api/patient/soft/:id</td> <td>Soft delete patient</td> <td>❌</td> <td>—</td> </tr> </table>
+
+  <h3>🛠️ Prescription Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/prescription/my-prescription</td> <td>Get prescriptions for logged-in patient</td> <td>✅</td> <td>PATIENT</td> </tr> <tr> <td>POST</td> <td>/api/prescription/</td> <td>Create a new prescription</td> <td>✅</td> <td>DOCTOR</td> </tr> </table>
+
+<h3>🛠️ Schedule Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/schedule/</td> <td>Get schedules for logged-in doctor</td> <td>✅</td> <td>DOCTOR</td> </tr> <tr> <td>POST</td> <td>/api/schedule/</td> <td>Create a new schedule</td> <td>❌</td> <td>—</td> </tr> <tr> <td>DELETE</td> <td>/api/schedule/:id</td> <td>Delete a schedule</td> <td>❌</td> <td>—</td> </tr> </table>
+
+<h3>🛠️ Specialties Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/specialties/</td> <td>Get all specialties</td> <td>❌</td> <td>—</td> </tr> <tr> <td>POST</td> <td>/api/specialties/</td> <td>Create a new specialty (with file upload)</td> <td>❌</td> <td>—</td> </tr> <tr> <td>DELETE</td> <td>/api/specialties/:id</td> <td>Delete a specialty by ID</td> <td>✅</td> <td>ADMIN</td> </tr> </table>
+
+ <h3>🛠️ Meta Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/meta/</td> <td>Fetch dashboard meta data</td> <td>✅</td> <td>ADMIN, DOCTOR, PATIENT</td> </tr> </table>
+
+ <h3>🛠️ Review Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/review/</td> <td>Get all reviews</td> <td>❌</td> <td>—</td> </tr> <tr> <td>POST</td> <td>/api/review/</td> <td>Create a new review</td> <td>✅</td> <td>PATIENT</td> </tr> </table>
 
 
 
+ 
