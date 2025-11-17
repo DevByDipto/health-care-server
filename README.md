@@ -136,8 +136,55 @@ src/
 
  <h3>🛠️ Review Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/review/</td> <td>Get all reviews</td> <td>❌</td> <td>—</td> </tr> <tr> <td>POST</td> <td>/api/review/</td> <td>Create a new review</td> <td>✅</td> <td>PATIENT</td> </tr> </table>
 
+### Setup instructions
+#### 1️⃣ Clone the Repository
 
+```bash
+git clone https://github.com/your-username/ride-booking-backend.git
+cd ride-booking-backend
+```
+#### 2️⃣ Install Dependencies
+```bash
+npm install
+```
+#### 3️⃣ Configure Environment Variables
+```
+# DATABASE
+DATABASE_URL=postgresql://postgres:password@localhost:5432/your_database?schema=public
+
+# APP CONFIG
+NODE_ENV=production
+PORT=5000
+reset_pass_link=your_localhost
+
+# CLOUDINARY
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+
+# JWT
+JWT_SECRET=your_jwt_secret_key_here
+
+# OPENAI / OPENROUTER
+OPENROUTER_API_KEY=your_openrouter_key_here
+
+# STRIPE
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+
+#nodemailer
+EMAIL=your_email
+app_pass=your_email_app_password
+
+
+
+```
+#### 4️⃣ Run the Development Server
+```
+npm run dev
+```
 
  
+
 
 
