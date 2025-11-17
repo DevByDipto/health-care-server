@@ -122,7 +122,13 @@ src/
 
   <h3>🛠️ Prescription Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/prescription/my-prescription</td> <td>Get prescriptions for logged-in patient</td> <td>✅</td> <td>PATIENT</td> </tr> <tr> <td>POST</td> <td>/api/prescription/</td> <td>Create a new prescription</td> <td>✅</td> <td>DOCTOR</td> </tr> </table>
 
-<h3>🛠️ Schedule Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/schedule/</td> <td>Get schedules for logged-in doctor</td> <td>✅</td> <td>DOCTOR</td> </tr> <tr> <td>POST</td> <td>/api/schedule/</td> <td>Create a new schedule</td> <td>❌</td> <td>—</td> </tr> <tr> <td>DELETE</td> <td>/api/schedule/:id</td> <td>Delete a schedule</td> <td>❌</td> <td>—</td> </tr> </table>
+<h3>🛠️ Schedule Routes</h3>
+<table border="1" cellpadding="5" cellspacing="0">
+ <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr>
+ <tr> <td>GET</td> <td>/api/schedule/</td> <td>Get schedules for logged-in doctor</td> <td>✅</td> <td>DOCTOR</td> 
+ </tr> <tr> <td>POST</td> <td>/api/schedule/</td> <td>Create a new schedule</td> <td>✅</td> <td>ADMIN</td> </tr>
+ <tr> <td>DELETE</td> <td>/api/schedule/:id</td> <td>Delete a schedule</td> <td>✅</td> <td>ADMIN</td> </tr>
+</table>
 
 <h3>🛠️ Specialties Routes</h3> <table border="1" cellpadding="5" cellspacing="0"> <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr> <tr> <td>GET</td> <td>/api/specialties/</td> <td>Get all specialties</td> <td>❌</td> <td>—</td> </tr> <tr> <td>POST</td> <td>/api/specialties/</td> <td>Create a new specialty (with file upload)</td> <td>❌</td> <td>—</td> </tr> <tr> <td>DELETE</td> <td>/api/specialties/:id</td> <td>Delete a specialty by ID</td> <td>✅</td> <td>ADMIN</td> </tr> </table>
 
@@ -133,4 +139,5 @@ src/
 
 
  
+
 
