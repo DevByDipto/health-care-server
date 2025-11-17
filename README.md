@@ -105,7 +105,7 @@ src/
 <table border="1" cellpadding="5" cellspacing="0"> 
  <tr> <th>Method</th> <th>Endpoint</th> <th>Description</th> <th>Auth</th> <th>Role</th> </tr>
  <tr> <td>GET</td> <td>/api/doctor/</td> <td>Get all doctors</td> <td>❌</td> <td>—</td> </tr> 
- <tr> <td>PATCH</td> <td>/api/doctor/:id</td> <td>Update doctor information</td> <td>❌</td> <td>—</td> </tr>
+ <tr> <td>PATCH</td> <td>/api/doctor/:id</td> <td>Update doctor information</td> <td>✅</td> <td>DOCTOR,ADMIN</td> </tr>
  <tr> <td>POST</td> <td>/api/doctor/suggestion</td> <td>Get AI-based doctor suggestions</td> <td>❌</td> <td>—</td> </tr>
  <tr> <td>GET</td> <td>/api/doctor/:id</td> <td>Get doctor by ID</td> <td>❌</td> <td>—</td> </tr>
  <tr> <td>DELETE</td> <td>/api/doctor/:id</td> <td>Hard delete doctor</td> <td>✅</td> <td>ADMIN</td> </tr>
@@ -133,3 +133,4 @@ src/
 
 
  
+
