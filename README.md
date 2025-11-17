@@ -1,4 +1,4 @@
-# Health Care Server
+#🏥 Health Care Server
 
 A **Node.js + Express** backend server for a Health Care Management System, designed to handle patient data, appointments, doctors, and medical records. It uses **PostgreSQL** for data storage, JWT for secure authentication and  AI-driven doctor suggestions based on patient symptoms. 
 
@@ -185,6 +185,7 @@ npm run dev
 ```
 
  
+
 
 
 
