@@ -24,13 +24,13 @@ This backend powers a Health Care Management System. Key roles include **Admin**
 ---
 ### Admin Credentials
 - email: admin@gmail.com
-- pass: 123456Aa
-### Agent Credentials
-- email: 1agent@gmail.com
-- pass: 123456Aa
-### User Credentials
-- email: 1user@gmail.com
-- pass: 123456Aa
+- pass: 123456
+### Patient Credentials
+- email: patient@gmail.com
+- pass: 123456
+### Doctor Credentials
+- email: doctor@gmail.com
+- pass: 123456
 ---
 ## Features
 
@@ -238,6 +238,7 @@ npm run dev
 ```
 
  
+
 
 
 
