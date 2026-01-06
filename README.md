@@ -22,7 +22,16 @@ This backend powers a Health Care Management System. Key roles include **Admin**
 - Authentication & Authorization  
 
 ---
-
+### Admin Credentials
+- email: admin@gmail.com
+- pass: 123456Aa
+### Agent Credentials
+- email: 1agent@gmail.com
+- pass: 123456Aa
+### User Credentials
+- email: 1user@gmail.com
+- pass: 123456Aa
+---
 ## Features
 
 - ✅ OpenAI Integration for AI-driven doctor suggestions based on patient symptoms
@@ -229,6 +238,7 @@ npm run dev
 ```
 
  
+
 
 
 
